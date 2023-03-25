@@ -2,23 +2,32 @@
 
 #include <stdio.h>
 
-#define SIZE 101
+#define MAXINPUTINT 10
 
+double AvgArray(int x[], int n)
+{
+	double average;
+	int sum = 0;
+
+	for (int i = 0; i < n; i++) {
+		sum += x[i];
+	}
+	average = (double)sum / n;
+
+	return average;
+}
 int main(void)
 {
-	int natural_num[SIZE] = { 0 }, input_num;
+	int int_num[MAXINPUTINT], n = 0;
 
-	while (1) {
-		scanf("%d", &input_num);
-		if (input_num == 0)
+	for (int i = 0; i < MAXINPUTINT; i++) {
+		scanf("%d", &int_num[i]);
+		if (int_num[i] == 0) {
 			break;
-		natural_num[input_num] += 1;
+		}
+		n++;
 	}
-
-	for (int i = 0; i < SIZE; i++) {
-		if (natural_num[i] >= 1)
-			printf("%d:%d ", i, natural_num[i]);
-	}
+	printf("%g\n", AvgArray(int_num, n));
 
 	return 0;
 }

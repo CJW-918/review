@@ -2,34 +2,39 @@
 
 #include <stdio.h>
 
-#define DEGREE 21
+#define SIZE 5
 
-double nsquare(double x, int degree)
+void GetIntArray(int v[], int n)
 {
-	double squares = 1;
-	int m;
+	for (int i = 0; i < n; i++)
+		scanf("%d", &v[i]);
 
-	if (degree == 0)
-		return squares;
-	for (m = 0; m < degree; m++)
-		squares = squares * x;
-	
-	return squares;
+	return v;
+}
+int Trim(int x[], int n)
+{
+	for (int i = 0; i < n; i++) {
+		for (int j = i + 1; j < n ; j++) {
+			if (x[i] == x[j]) {
+				for (int k = j; k < n; k++)
+					x[k] = x[k + 1];
+				n -= 1;
+				j -= 1;
+			}
+		}
+	}
+
+	return n;
 }
 int main(void)
 {
-	int arr_size, n;
-	double arr[DEGREE], input_x;
-	double value = 0;
+	int int_num[SIZE], length_array;
 
-	scanf("%d", &n);
-	for (int i = 0; i < n + 1; i++)
-		scanf("%lf", &arr[i]);
-	scanf("%lf", &input_x);
+	GetIntArray(int_num, SIZE);
+	length_array = Trim(int_num, SIZE);
 
-	for (int j = 0; j < n + 1; j++)
-		value += arr[j] * nsquare(input_x, n - j);
-	printf("%g\n", value);
+	for (int i = 0; i < length_array; i++)
+		printf("%d ", int_num[i]);
 
 	return 0;
 }

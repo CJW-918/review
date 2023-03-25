@@ -2,28 +2,34 @@
 
 #include <stdio.h>
 
-#define SIZE 10
+#define SIZE 9
 
-int main(void)
+int DeleteKmulArray(int x[], int n, int k)
 {
-	int int_num[SIZE], big[SIZE], i = 0;
-
-	while (1) {
-		scanf("%d", &int_num[i]);
-		if (int_num[i] == 0)
-			break;
-		i++;
-	}
-
-	for (int j = 0; j < i; j++) {
-		big[j] = 1;
-		for (int k = 0; k < SIZE; k++) {
-			if (int_num[j] < int_num[k])
-				big[j] += 1;
+	int count = 0;
+	for (int i = 0; i < n; i++) {
+		if (x[i] % k == 0) {
+			for (int j = i; j < n - 1; j++)
+				x[j] = x[j + 1];
+			count += 1;
 		}
 	}
-	for (int l = 0; l < i; l++)
-		printf("%d ", big[l]);
+
+	return (n - count);
+}
+void PrintIntArray(int v[], int n)
+{
+	for (int i = 0; i < n; i++)
+		printf("%d ", v[i]);
+}
+int main(void)
+{
+	int k, x[SIZE] = { 1, 3, 5, 7, 9, 2, 4, 6, 8 };
+	int all_n;
+
+	scanf("%d", &k);
+	all_n = DeleteKmulArray(x, SIZE, k);
+	PrintIntArray(x, all_n);
 
 	return 0;
 }
